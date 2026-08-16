@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-mac-bg text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .mac-card {
+    @apply bg-mac-surface backdrop-blur-xl border border-mac-border shadow-mac rounded-2xl overflow-hidden;
+  }
+  
+  .mac-button {
+    @apply px-4 py-2 bg-mac-blue text-white rounded-lg font-medium text-sm transition-all hover:bg-blue-600 active:scale-95 shadow-sm;
+  }
+  
+  .mac-input {
+    @apply w-full px-3 py-2 bg-white border border-mac-border rounded-lg focus:outline-none focus:ring-2 focus:ring-mac-blue/30 focus:border-mac-blue transition-all;
+  }
+}
