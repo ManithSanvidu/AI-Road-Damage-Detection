@@ -1,0 +1,8 @@
+path: D:/Desktop/Projects/AI-Road-Damage-Detection/dataset  # Dataset root directory
+train: images/train  # Training images
+val: images/val      # Validation images
+test: images/test    # Test images (optional)
+
+# Classes
+nc: 4  # Number of classes
+names: ['D00', 'D10', 'D20', 'D40'] 
