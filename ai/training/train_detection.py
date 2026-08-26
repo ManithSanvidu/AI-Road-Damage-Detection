@@ -3,7 +3,7 @@ from ultralytics import YOLO
 
 def main():
     current_dir=os.path.dirname(os.path.abspath(__file__))
-    data_yaml_path=os.path.abspath(os.path.join(current_dir,'..''..','dataset','data.yaml'))
+    data_yaml_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'dataset', 'data.yaml'))
 
     print(f"Using dataset configuration at:{data_yaml_path}")
 
