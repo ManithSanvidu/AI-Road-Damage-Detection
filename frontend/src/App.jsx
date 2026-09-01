@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import MapView from './pages/MapView';
+import VideoAnalysis from './pages/VideoAnalysis';
 
 function App() {
   // Simple auth mock for now
@@ -22,7 +24,8 @@ function App() {
           <Route index element={<Navigate to="/app/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="upload" element={<Upload />} />
-          <Route path="map" element={<div className="p-8"><h1 className="text-2xl font-semibold mb-6">Map View</h1><div className="mac-card p-6 h-[500px] flex items-center justify-center text-mac-gray">Map will go here</div></div>} />
+          <Route path="map" element={<MapView />} />
+          <Route path="video" element={<VideoAnalysis />} />
         </Route>
         
         {/* Redirect unknown routes */}
