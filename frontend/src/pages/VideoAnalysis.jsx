@@ -12,7 +12,7 @@ export default function VideoAnalysis() {
     const file = event.target.files[0];
     if (!file) return;
 
-    setUploadStatus('Uploading and processing...');
+    setUploadStatus('Uploading video...');
     const formData = new FormData();
     formData.append('file', file);
 
@@ -22,7 +22,8 @@ export default function VideoAnalysis() {
         body: formData,
       });
       const data = await response.json();
-      setUploadStatus('Video processed successfully! Check the backend processed_videos folder.');
+      setUploadStatus('');
+      setStreamSource(`http://localhost:8000/video/stream_file?filename=${encodeURIComponent(data.filename)}`);
     } catch (error) {
       console.error(error);
       setUploadStatus('Error uploading video.');
@@ -112,25 +113,33 @@ export default function VideoAnalysis() {
 
         {/* Upload Tab */}
         {activeTab === 'upload' && (
-          <div className="text-center text-gray-500">
-            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <p>Select a video file to process it through the AI model.</p>
-            <input 
-              type="file" 
-              accept="video/*" 
-              className="hidden" 
-              ref={fileInputRef} 
-              onChange={handleFileUpload} 
-            />
-            <button 
-              onClick={() => fileInputRef.current?.click()}
-              className="mt-4 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-            >
-              Browse Files
-            </button>
-            {uploadStatus && (
-              <div className="mt-6 p-4 rounded-lg bg-blue-50 text-blue-800 font-medium border border-blue-200">
-                {uploadStatus}
+          <div className="w-full text-center">
+            {!streamSource ? (
+              <div className="text-gray-500">
+                <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                <p>Select a video file to process it through the AI model.</p>
+                <input 
+                  type="file" 
+                  accept="video/*" 
+                  className="hidden" 
+                  ref={fileInputRef} 
+                  onChange={handleFileUpload} 
+                />
+                <button 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="mt-4 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Browse Files
+                </button>
+                {uploadStatus && (
+                  <div className="mt-6 p-4 rounded-lg bg-blue-50 text-blue-800 font-medium border border-blue-200 inline-block">
+                    {uploadStatus}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="rounded-lg overflow-hidden border-2 border-gray-300 w-full max-w-3xl mx-auto shadow-md bg-black">
+                <img src={streamSource} alt="Processed Video Stream" className="w-full h-auto" />
               </div>
             )}
           </div>
