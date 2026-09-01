@@ -131,7 +131,7 @@ export default function Home() {
             {/* Feature 1 */}
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="h-48 w-full overflow-hidden bg-gray-200">
-                <img src="https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cracked road" className="w-full h-full object-cover" />
+                <img src="https://plus.unsplash.com/premium_photo-1749040967110-62a002bb39ae?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cracked road" className="w-full h-full object-cover" />
               </div>
               <div className="p-8 flex-1 flex flex-col">
                 <Layers className="w-8 h-8 text-mac-blue mb-4" />
@@ -143,7 +143,7 @@ export default function Home() {
             {/* Feature 2 */}
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="h-48 w-full overflow-hidden bg-gray-200">
-                <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Road repair budget allocation" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1544819679-57b273c027a3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Road repair budget allocation" className="w-full h-full object-cover" />
               </div>
               <div className="p-8 flex-1 flex flex-col">
                 <Activity className="w-8 h-8 text-mac-blue mb-4" />
