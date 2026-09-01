@@ -1,12 +1,14 @@
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, UploadCloud, Map as MapIcon, Settings, LogOut } from 'lucide-react';
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, UploadCloud, Map as MapIcon, Settings, LogOut, Video } from 'lucide-react';
 
 export default function MainLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: 'Dashboard', path: '/app/dashboard', icon: LayoutDashboard },
     { name: 'Analyze Image', path: '/app/upload', icon: UploadCloud },
+    { name: 'Video Analysis', path: '/app/video', icon: Video },
     { name: 'Map View', path: '/app/map', icon: MapIcon },
   ];
 
@@ -45,7 +47,10 @@ export default function MainLayout() {
         </div>
 
         <div className="p-6">
-           <button className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-sm font-medium text-gray-600 hover:bg-black/5 transition-colors">
+           <button 
+              onClick={() => navigate('/')}
+              className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-sm font-medium text-gray-600 hover:bg-black/5 transition-colors"
+           >
               <LogOut className="w-4 h-4" />
               Logout
            </button>
