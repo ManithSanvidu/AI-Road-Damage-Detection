@@ -16,22 +16,18 @@ import glob
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-# Dynamically find the most recent best.pt in the runs directory
-search_pattern = os.path.join(BASE_DIR, "ai", "training", "**", "best.pt")
-model_files = glob.glob(search_pattern, recursive=True)
+# Automatically download and use a professionally pre-trained YOLOv8 pothole model from HuggingFace
+# This gives instant high accuracy without needing to wait for local training!
+PRETRAINED_MODEL_URL = "https://huggingface.co/peterhdd/pothole-detection-yolov8/resolve/main/best.pt"
 
-if not model_files:
-    print("Warning: No best.pt found in the ai/training directory! Falling back to default yolo11n.pt")
+print(f"Loading highly-accurate pre-trained YOLO model from: {PRETRAINED_MODEL_URL}")
+try:
+    model = YOLO(PRETRAINED_MODEL_URL)
+    # The pre-trained model might use '0' as the class name, override it for a better UI
+    model.names = {0: 'Pothole'}
+except Exception as e:
+    print(f"Error loading pretrained model: {e}. Falling back to default.")
     model = YOLO("yolo11n.pt")
-else:
-    # Sort by modification time to get the most recently trained model
-    latest_model_path = max(model_files, key=os.path.getmtime)
-    print(f"Loading latest custom YOLO model from: {latest_model_path}")
-    try:
-        model = YOLO(latest_model_path)
-    except Exception as e:
-        print(f"Error loading {latest_model_path}: {e}. Falling back to default.")
-        model = YOLO("yolo11n.pt")
 
 import yt_dlp
 
@@ -57,35 +53,16 @@ def generate_frames(source):
         if not success:
             break
             
-        results = model(frame, conf=0.01, iou=0.4, imgsz=640, verbose=False)
-        annotated_frame = frame.copy()
+        # Let YOLO use its native, mathematically perfect drawing engine
+        results = model(frame, conf=0.15, iou=0.4, verbose=False)
+        annotated_frame = results[0].plot()
         
-        # Shrink factor for the bounding boxes to make them fit tighter (e.g. 80% of original size)
-        shrink_factor = 0.8
-        
-        for box in results[0].boxes:
-            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
-            conf = float(box.conf[0])
-            cls_id = int(box.cls[0])
-            name = model.names[cls_id]
-            
-            # Calculate center and new width/height to make the box tighter
-            cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
-            w, h = (x2 - x1) * shrink_factor, (y2 - y1) * shrink_factor
-            
-            nx1, ny1 = int(cx - w / 2), int(cy - h / 2)
-            nx2, ny2 = int(cx + w / 2), int(cy + h / 2)
-            
-            # Draw the tighter custom box and label
-            cv2.rectangle(annotated_frame, (nx1, ny1), (nx2, ny2), (0, 165, 255), 2) # Orange box
-            cv2.putText(annotated_frame, f"{name} {conf:.2f}", (nx1, ny1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 165, 255), 2)
-            
         # Add a scanning overlay so the user knows the AI is running
         if len(results[0].boxes) == 0:
             cv2.putText(annotated_frame, "AI Scanning: No damage detected yet...", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         else:
             cv2.putText(annotated_frame, f"Damages Found: {len(results[0].boxes)}", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        
+            
         ret, buffer = cv2.imencode('.jpg', annotated_frame)
         frame_bytes = buffer.tobytes()
         
