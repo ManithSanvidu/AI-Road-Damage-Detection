@@ -9,15 +9,15 @@ def main():
 
     model = YOLO('yolo11n.pt')
 
-    # FIXED: imgsz MUST be at least 640 for road damages, and epochs should be at least 50
+    # FIXED: imgsz adjusted to 416 and batch to 2 to prevent CPU Out of Memory crashes
     results = model.train(
         data=data_yaml_path,
         epochs=100,
-        imgsz=640,
-        batch=16,
+        imgsz=416,
+        batch=2,
         name='rdd_yolov11',
         project='runs/train',
-        workers=4,
+        workers=0,
         patience=20,
         device=''
     )
