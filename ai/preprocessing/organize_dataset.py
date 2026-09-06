@@ -10,10 +10,9 @@ RAW_XML_DIR = os.path.join(BASE_DIR, '..', '..', 'dataset', 'raw_annotations')
 OUTPUT_BASE = os.path.join(BASE_DIR, '..', '..', 'dataset')
 
 CLASS_MAPPING = {
-    'D00': 0, # Longitudinal Crack
-    'D10': 1, # Transverse Crack
-    'D20': 2, # Alligator Crack
-    'D40': 3  # Pothole
+    'minor_pothole': 0,
+    'medium_pothole': 1,
+    'major_pothole': 2
 }
 
 def convert_to_yolo(size,box):
