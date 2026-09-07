@@ -17,13 +17,13 @@ export default function VideoAnalysis() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/video/upload', {
+      const response = await fetch('https://manibro99-road-damage-detection.hf.space/video/upload', {
         method: 'POST',
         body: formData,
       });
       const data = await response.json();
       setUploadStatus('');
-      setStreamSource(`http://localhost:8000/video/stream_file?filename=${encodeURIComponent(data.filename)}`);
+      setStreamSource(`https://manibro99-road-damage-detection.hf.space/video/stream_file?filename=${encodeURIComponent(data.filename)}`);
     } catch (error) {
       console.error(error);
       setUploadStatus('Error uploading video.');
@@ -31,12 +31,12 @@ export default function VideoAnalysis() {
   };
 
   const startCamera = () => {
-    setStreamSource('http://localhost:8000/video/stream_camera');
+    setStreamSource('https://manibro99-road-damage-detection.hf.space/video/stream_camera');
   };
 
   const startUrlStream = () => {
     if (url) {
-      setStreamSource(`http://localhost:8000/video/stream_url?url=${encodeURIComponent(url)}`);
+      setStreamSource(`https://manibro99-road-damage-detection.hf.space/video/stream_url?url=${encodeURIComponent(url)}`);
     }
   };
 
