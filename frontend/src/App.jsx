@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MapView from './pages/MapView';
 import VideoAnalysis from './pages/VideoAnalysis';
+import ReportDamage from './pages/ReportDamage';
 
 function App() {
   // Simple auth mock for now
@@ -26,6 +27,7 @@ function App() {
           <Route path="upload" element={<Upload />} />
           <Route path="map" element={<MapView />} />
           <Route path="video" element={<VideoAnalysis />} />
+          <Route path="report" element={<ReportDamage />} />
         </Route>
         
         {/* Redirect unknown routes */}
