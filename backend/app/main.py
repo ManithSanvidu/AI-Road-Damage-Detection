@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.database.database import Base, engine
-from app.routers import auth_router, upload_router, video_router
+from app.routers import auth_router, upload_router, video_router, report_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +19,7 @@ app.add_middleware(
 app.include_router(auth_router.router)
 app.include_router(upload_router.router)
 app.include_router(video_router.router)
+app.include_router(report_router.router)
 
 
 @app.get("/")

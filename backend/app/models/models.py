@@ -43,3 +43,15 @@ class Detection(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     image = relationship("Image", back_populates="detections")
+
+
+class DamageReport(Base):
+    __tablename__ = "damage_reports"
+
+    id = Column(Integer, primary_key=True, index=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
+    damage_type = Column(String)
+    severity = Column(String)
+    description = Column(String, nullable=True)
+    reported_at = Column(DateTime, default=datetime.utcnow)

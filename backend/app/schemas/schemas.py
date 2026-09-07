@@ -40,3 +40,19 @@ class ImageOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class DamageReportCreate(BaseModel):
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    damage_type: str
+    severity: str
+    description: Optional[str] = None
+
+
+class DamageReportOut(DamageReportCreate):
+    id: int
+    reported_at: datetime
+
+    class Config:
+        from_attributes = True
