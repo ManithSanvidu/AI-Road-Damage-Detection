@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, UploadCloud, Map as MapIcon, Settings, LogOut, Video } from 'lucide-react';
+import { LayoutDashboard, UploadCloud, Map as MapIcon, Settings, LogOut, Video, FileText } from 'lucide-react';
 
 export default function MainLayout() {
   const location = useLocation();
@@ -9,6 +9,7 @@ export default function MainLayout() {
     { name: 'Dashboard', path: '/app/dashboard', icon: LayoutDashboard },
     { name: 'Analyze Image', path: '/app/upload', icon: UploadCloud },
     { name: 'Video Analysis', path: '/app/video', icon: Video },
+    { name: 'Report Damage', path: '/app/report', icon: FileText },
     { name: 'Map View', path: '/app/map', icon: MapIcon },
   ];
 
