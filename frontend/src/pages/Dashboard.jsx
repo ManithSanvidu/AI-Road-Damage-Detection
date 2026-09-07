@@ -16,7 +16,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://localhost:8000/reports');
+        const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports');
         if (response.ok) {
           const data = await response.json();
           setReports(data);
