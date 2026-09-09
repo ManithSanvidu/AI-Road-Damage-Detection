@@ -48,6 +48,11 @@ class DamageReportCreate(BaseModel):
     damage_type: str
     severity: str
     description: Optional[str] = None
+    status: Optional[str] = "Reported"
+
+
+class DamageReportUpdate(BaseModel):
+    status: str
 
 
 class DamageReportOut(DamageReportCreate):
