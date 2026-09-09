@@ -30,3 +30,15 @@ app.include_router(report_router.router)
 @app.get("/")
 def read_root():
     return {"message": "Road Damage Detection API is running"}
+
+from fastapi.responses import JSONResponse
+from fastapi import Request
+import traceback
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Internal Server Error", "details": str(exc), "traceback": traceback.format_exc()},
+        headers={"Access-Control-Allow-Origin": "https://ai-road-damage-detection.vercel.app"}
+    )
