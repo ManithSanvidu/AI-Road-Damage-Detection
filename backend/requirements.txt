@@ -5,3 +5,9 @@ python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 pydantic
+ultralytics
+opencv-python-headless
+pytubefix
+vidgear
+numpy
+psycopg2-binary
