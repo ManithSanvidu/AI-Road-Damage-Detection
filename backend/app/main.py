@@ -37,8 +37,12 @@ import traceback
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    return JSONResponse(
+    response = JSONResponse(
         status_code=500,
-        content={"message": "Internal Server Error", "details": str(exc), "traceback": traceback.format_exc()},
-        headers={"Access-Control-Allow-Origin": "https://ai-road-damage-detection.vercel.app"}
+        content={"message": "Internal Server Error", "details": str(exc), "traceback": traceback.format_exc()}
     )
+    # Ensure CORS headers are present even on 500 errors so the frontend can read the error
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
