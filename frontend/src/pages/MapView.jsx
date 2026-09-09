@@ -45,7 +45,7 @@ export default function MapView() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/reports');
+        const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports');
         if (response.ok) {
           const data = await response.json();
           setDamageReports(data);
