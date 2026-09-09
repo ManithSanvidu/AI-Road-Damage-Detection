@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import MapView from './pages/MapView';
 import VideoAnalysis from './pages/VideoAnalysis';
 import ReportDamage from './pages/ReportDamage';
+import AIPerformance from './pages/AIPerformance';
 
 function App() {
   // Simple auth mock for now
@@ -28,6 +29,7 @@ function App() {
           <Route path="map" element={<MapView />} />
           <Route path="video" element={<VideoAnalysis />} />
           <Route path="report" element={<ReportDamage />} />
+          <Route path="ai-performance" element={<AIPerformance />} />
         </Route>
         
         {/* Redirect unknown routes */}

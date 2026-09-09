@@ -55,9 +55,14 @@ export default function ReportDamage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.latitude || !formData.longitude) {
+      setStatus('Please click on the map to select a location before submitting!');
+      return;
+    }
+
     try {
       setStatus('Submitting report...');
-      const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports', {
+      const response = await fetch('http://127.0.0.1:8000/reports', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -65,7 +70,7 @@ export default function ReportDamage() {
           longitude: formData.longitude ? parseFloat(formData.longitude) : null,
           damage_type: formData.damage_type,
           severity: formData.severity,
-          description: formData.description
+          description: formData.district ? `[${formData.district}] ${formData.description}` : formData.description
         })
       });
       if (response.ok) {

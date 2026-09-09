@@ -54,4 +54,5 @@ class DamageReport(Base):
     damage_type = Column(String)
     severity = Column(String)
     description = Column(String, nullable=True)
+    status = Column(String, default="Reported")
     reported_at = Column(DateTime, default=datetime.utcnow)
