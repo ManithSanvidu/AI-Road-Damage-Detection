@@ -62,7 +62,7 @@ export default function ReportDamage() {
 
     try {
       setStatus('Submitting report...');
-      const response = await fetch('http://127.0.0.1:8000/reports', {
+      const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
