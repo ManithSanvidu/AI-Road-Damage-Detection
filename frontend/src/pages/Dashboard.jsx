@@ -17,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports');
+        const response = await fetch('https://ai-road-damage-detection-q6sv.onrender.com/reports');
         if (response.ok) {
           const data = await response.json();
           setReports(data);
@@ -55,7 +55,7 @@ export default function Dashboard() {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`https://manibro99-road-damage-detection.hf.space/reports/${id}`, {
+      const response = await fetch(`https://ai-road-damage-detection-q6sv.onrender.com/reports/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })

@@ -62,7 +62,7 @@ export default function ReportDamage() {
 
     try {
       setStatus('Submitting report...');
-      const response = await fetch('https://manibro99-road-damage-detection.hf.space/reports', {
+      const response = await fetch('https://ai-road-damage-detection-q6sv.onrender.com/reports', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
